@@ -66,6 +66,12 @@ def cached_live_lines(_api_key, season, week):
     return live, quota
 
 
+section = st.radio("View", ["Live dashboard", "Backtest & strategies"], horizontal=True)
+if section == "Backtest & strategies":
+    from backtest_ui import render_backtest
+    render_backtest(api_key(), APP)
+    st.stop()
+
 state, rolled, rollover_message = maybe_rollover()
 season = int(state["season"])
 week = int(state["current_week"])
